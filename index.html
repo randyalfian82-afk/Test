@@ -1,35 +1,189 @@
 <!DOCTYPE html>
-<html lang "en">
-    <head>
-        <title>
-            GAMBAR ORANG JELEK
-        </title>
-        <style>
-            .judul{
-                text-align: center;
-                color: white;
-                background-color: navy;
-                margin: 0px 0px 50px 0px;
-                padding: 25px 0px 25px 0px;
-            }
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- =================================
+         HALAMAN MASUK
+    ================================== -->
+    <section id="loginPage" class="page active login-page">
+        <div class="login-overlay"></div>
+        <div class="heart-decoration top">
+            ✧ ˚ ༘ ♡ ʏᴏᴜ & ᴍᴇ ♡ ༘ ˚ ✧
+        </div>
+        <div class="login-card">
+            <div class="heart-icon">
+                ♡
+            </div>
+            <div class="heart-badge">
+                sᴘᴇᴄɪᴀʟ
+            </div>
+            <h1>
+                HAI KAMU
+                <br>
+                ❤️
+            </h1>
+            <p class="subtitle">
+                Ada sesuatu yang ingin kutanyakan padamu
+            </p>
+            <form id="loginForm">
+                <label for="nama">
+                    NAMA LENGKAP
+                </label>
+                <input
+                    type="text"
+                    id="nama"
+                    placeholder="Tulis namamu di sini..."
+                    required>
+                <label for="tglLahir">
+                    TANGGAL LAHIR
+                </label>
+                <input
+                    type="text"
+                    id="tglLahir"
+                    placeholder="Contoh: 01 Januari 2000 / 01-01-2000"
+                    required>
+                <button type="submit" class="main-button">
+                    MASUK →
+                </button>
+            </form>
+        </div>
+        <div class="heart-decoration bottom">
+            ✧ ˚ ༘ ᴛᴏ ᴍʏ ғᴀᴠᴏʀɪᴛᴇ ᴘᴇʀsᴏɴ ༘ ˚ ✧
+        </div>
+    </section>
 
-            body {
-                background-image: url("https://images.freecreatives.com/wp-content/uploads/2016/03/Wooden-Background-For-Free-Download.jpg");
-                background-size: cover;     
-                background-repeat: no-repeat; 
-                background-position: center;  
-                background-attachment: fixed; 
-            }
-        
-        </style>
-    </head>
-    <body>
-         <h1 class="judul">INI SIREN CUUU</h1>
+    <!-- =================================
+         HALAMAN PERTANYAAN
+    ================================== -->
+    <section id="quizPage" class="page quiz-page">
+        <div class="heart-decoration top">
+            ✧ ˚ ༘ sᴏᴍᴇ ǫᴜᴇsᴛɪᴏɴs ғᴏʀ ʏᴏᴜ ༘ ˚ ✧
+        </div>
+        <div class="quiz-card">
+            <div class="user-badge">
+                ♡
+                <span id="displayNama">-</span>
+            </div>
+            <div id="questionNumber" class="question-number">
+                PERTANYAAN 1 / 5
+            </div>
+            <h2 id="questionText">
+            </h2>
+            <form id="quizForm">
+                <textarea
+                    id="answer"
+                    placeholder="Tulis jawabanmu di sini..."
+                    autocomplete="off"
+                    required></textarea>
+                <button type="submit" class="main-button">
+                    LANJUT →
+                </button>
+            </form>
+        </div>
+        <div class="heart-decoration bottom">
+            ✧ ˚ ༘ ɪ'ᴍ ʟɪsᴛᴇɴɪɴɢ ༘ ˚ ✧
+        </div>
+    </section>
 
-         <div style="text-align: center;">
-         <img src="gndt.jpg" height="1000" width="auto"
-         </div>
-         
+    <!-- =================================
+         HALAMAN FOTO
+    ================================== -->
+    <section id="cameraPage" class="page camera-page">
+        <div class="booth-header">
+            <div class="heart-icon">
+                📸
+            </div>
+            <h1>
+                SESI KENANGAN
+            </h1>
+            <p>
+                Siapkan senyum terbaikmu!
+            </p>
+            <div id="photoCounter" class="photo-counter">
+                0 / 6 FOTO
+            </div>
+        </div>
+        <div class="camera-container">
+            <div class="live-label">
+                ♡ LIVESTREAM ♡
+            </div>
+            <video id="camera" autoplay playsinline></video>
+            <div id="countdown"></div>
+            <canvas id="canvas"></canvas>
+        </div>
+        <button id="snapButton" class="camera-button">
+            📸 AMBIL 6 FOTO
+        </button>
+        <div id="cameraError" class="error-message"></div>
+    </section>
 
-    </body>
+    <!-- =================================
+         HALAMAN HASIL
+    ================================== -->
+    <section id="resultPage" class="page result-page">
+        <div class="result-header">
+            <div class="heart-icon">
+                💌
+            </div>
+            <h1>
+                TERIMA KASIH
+            </h1>
+            <p>
+                Sudah menjawab dengan tulus
+            </p>
+            <div id="resultName" class="result-user">
+                Untuk: -
+            </div>
+        </div>
+        <div class="answers-container">
+            <h3>Jawabanmu:</h3>
+            <div id="allAnswers"></div>
+        </div>
+        <div class="strips-container">
+            <div id="strip1" class="photo-strip">
+                <div class="strip-top">
+                    ♡ ᴜs ♡
+                </div>
+                <div class="strip-title">
+                    ᴍᴇᴍᴏʀɪᴇs ᴡɪᴛʜ ʏᴏᴜ
+                </div>
+                <div class="strip-photo"><img id="result0" alt="Foto 1"></div>
+                <div class="strip-photo"><img id="result1" alt="Foto 2"></div>
+                <div class="strip-photo"><img id="result2" alt="Foto 3"></div>
+                <div class="strip-footer">
+                    <span id="date1"></span>
+                </div>
+            </div>
+            <div id="strip2" class="photo-strip">
+                <div class="strip-top">
+                    ♡ ᴜs ♡
+                </div>
+                <div class="strip-title">
+                    ᴍʏ ғᴀᴠᴏʀɪᴛᴇ ᴍᴏᴍᴇɴᴛs
+                </div>
+                <div class="strip-photo"><img id="result3" alt="Foto 4"></div>
+                <div class="strip-photo"><img id="result4" alt="Foto 5"></div>
+                <div class="strip-photo"><img id="result5" alt="Foto 6"></div>
+                <div class="strip-footer">
+                    <span id="date2"></span>
+                </div>
+            </div>
+        </div>
+        <div class="result-buttons">
+            <button id="downloadButton" class="download-button">
+                💾 SIMPAN KENANGAN
+            </button>
+            <button id="restartButton" class="restart-button">
+                🔄 ULANGI LAGI
+            </button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
 </html>
