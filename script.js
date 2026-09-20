@@ -1,91 +1,305 @@
-let namaPengguna = "";
-// === GANTI NOMOR WHATSAPP KAMU ===
-const NOMOR_WA = "6289508350068";
-// =================================
+/* =========================================
+DATA PENGGUNA
+========================================= */
 
-function gantiHalaman(idTujuan) {
-    // Sembunyikan SEMUA halaman
-    document.querySelectorAll('.container').forEach(c => {
-        c.classList.remove('active');
-        c.classList.add('hidden');
-    });
-    // Tampilkan halaman tujuan
-    const halaman = document.getElementById(idTujuan);
-    halaman.classList.remove('hidden');
-    halaman.classList.add('active');
+let namaPengguna = "";
+
+/* =========================================
+NOMOR WHATSAPP TUJUAN
+Ganti dengan nomor WhatsApp kamu.
+
+Format:
+628xxxxxxxxxx
+
+Jangan gunakan:
++62
+08
+spasi
+tanda -
+========================================= */
+
+const NOMOR_WA = "6289508350068";
+
+/* =========================================
+FUNGSI MASUK
+========================================= */
+
+function masuk() {
+
+```
+const namaInput = document
+    .getElementById("namaLengkap");
+
+const tanggalInput = document
+    .getElementById("tanggalLahir");
+
+const nama = namaInput.value.trim();
+const tanggalLahir = tanggalInput.value.trim();
+
+
+/* Cek input kosong */
+
+if (nama === "") {
+
+    alert("Nama kamu belum diisi ya 💗");
+
+    namaInput.focus();
+
+    return;
 }
 
-function kirimKeWA() {
-    const nama = document.getElementById('namaLengkap').value.trim();
-    const tgl = document.getElementById('tanggalLahir').value.trim();
-    const j1 = document.getElementById('jawab1').value.trim();
-    const j2 = document.getElementById('jawab2').value.trim();
-    const j3 = document.getElementById('jawab3').value.trim();
-    const j4 = document.getElementById('jawab4').value.trim();
-    const j5 = document.getElementById('jawab5').value.trim();
 
-    if (!j1 || !j2 || !j3 || !j4 || !j5) {
-        alert("Ada pertanyaan yang belum diisi ya 💗");
+if (tanggalLahir === "") {
+
+    alert("Tanggal lahir kamu belum diisi ya 💗");
+
+    tanggalInput.focus();
+
+    return;
+}
+
+
+/* Simpan nama */
+
+namaPengguna = nama;
+
+
+/* Masukkan nama ke semua halaman */
+
+for (let i = 1; i <= 5; i++) {
+
+    const namaElement =
+        document.getElementById(`nama${i}`);
+
+    if (namaElement) {
+
+        namaElement.innerText =
+            `Halo, ${namaPengguna} 💐`;
+    }
+}
+
+
+/* Masuk ke halaman pertama */
+
+keHalaman(1);
+```
+
+}
+
+/* =========================================
+PINDAH HALAMAN
+========================================= */
+
+function keHalaman(nomor) {
+
+```
+/* Sembunyikan semua container */
+
+const semuaContainer =
+    document.querySelectorAll(".container");
+
+semuaContainer.forEach(function (element) {
+
+    element.classList.remove("active");
+
+});
+
+
+/* Jika halaman selesai */
+
+if (nomor === "selesai") {
+
+    document
+        .getElementById("namaSelesai")
+        .innerText = namaPengguna;
+
+    document
+        .getElementById("terimaKasih")
+        .classList.add("active");
+
+    return;
+}
+
+
+/* Tampilkan halaman yang dipilih */
+
+const halaman =
+    document.getElementById(`page${nomor}`);
+
+if (halaman) {
+
+    halaman.classList.add("active");
+}
+```
+
+}
+
+/* =========================================
+CEK JAWABAN
+========================================= */
+
+function cekJawaban(nomor) {
+
+```
+const textarea =
+    document.getElementById(`jawab${nomor}`);
+
+if (!textarea) {
+    return false;
+}
+
+const jawaban =
+    textarea.value.trim();
+
+
+if (jawaban === "") {
+
+    alert(
+        `Pertanyaan ke-${nomor} belum diisi ya 💗`
+    );
+
+    textarea.focus();
+
+    return false;
+}
+
+return true;
+```
+
+}
+
+/* =========================================
+KIRIM SEMUA JAWABAN
+========================================= */
+
+function kirimSemua() {
+
+```
+/* Cek semua pertanyaan */
+
+for (let i = 1; i <= 5; i++) {
+
+    if (!cekJawaban(i)) {
+
+        keHalaman(i);
+
         return;
     }
-
-    const pesan = `Jawaban dari ${nama}
-
-1. Apa hal yang paling sering senyum-senyum sendiri?
-${j1}
-
-2. Ke mana ingin ajak aku pergi?
-${j2}
-
-3. Apa harapanmu ke depannya?
-${j3}
-
-4. Apa yang terlintas dengar namaku?
-${j4}
-
-5. Bagaimana cara menemani & mendukungmu?
-${j5}
-
-—— Dikirim dari halaman istimewa  ——`;
-
-    window.open(`https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(pesan)}`, '_blank');
-    document.getElementById('namaSelesai').innerText = nama;
-    gantiHalaman('selesai');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Halaman awal
-    document.getElementById('loginPage').classList.remove('hidden');
-    document.getElementById('loginPage').classList.add('active');
 
-    // Tombol Masuk
-    document.getElementById('btnMasuk').addEventListener('click', function() {
-        const nama = document.getElementById('namaLengkap').value.trim();
-        const tgl = document.getElementById('tanggalLahir').value.trim();
-        if (!nama || !tgl) {
-            alert("Isi nama dan tanggal lahir dulu ya 💗");
-            return;
-        }
-        namaPengguna = nama;
-        for (let i = 1; i <= 5; i++) {
-            const el = document.getElementById(`nama${i}`);
-            if (el) el.innerText = `Halo, ${nama} 💐`;
-        }
-        gantiHalaman('page1');
-    });
+/* Ambil tanggal lahir */
 
-    // Navigasi maju
-    document.getElementById('btnKe2').addEventListener('click', () => gantiHalaman('page2'));
-    document.getElementById('btnKe3').addEventListener('click', () => gantiHalaman('page3'));
-    document.getElementById('btnKe4').addEventListener('click', () => gantiHalaman('page4'));
-    document.getElementById('btnKe5').addEventListener('click', () => gantiHalaman('page5'));
+const tanggalLahir =
+    document
+        .getElementById("tanggalLahir")
+        .value
+        .trim();
 
-    // Navigasi kembali
-    document.getElementById('btnDari2Ke1').addEventListener('click', () => gantiHalaman('page1'));
-    document.getElementById('btnDari3Ke2').addEventListener('click', () => gantiHalaman('page2'));
-    document.getElementById('btnDari4Ke3').addEventListener('click', () => gantiHalaman('page3'));
-    document.getElementById('btnDari5Ke4').addEventListener('click', () => gantiHalaman('page4'));
 
-    // Kirim
-    document.getElementById('btnKirim').addEventListener('click', kirimKeWA);
-});
+/* Ambil semua jawaban */
+
+const jwb1 =
+    document
+        .getElementById("jawab1")
+        .value
+        .trim();
+
+const jwb2 =
+    document
+        .getElementById("jawab2")
+        .value
+        .trim();
+
+const jwb3 =
+    document
+        .getElementById("jawab3")
+        .value
+        .trim();
+
+const jwb4 =
+    document
+        .getElementById("jawab4")
+        .value
+        .trim();
+
+const jwb5 =
+    document
+        .getElementById("jawab5")
+        .value
+        .trim();
+
+
+/* =========================================
+   PESAN WHATSAPP
+========================================= */
+
+const pesan = `JAWABAN BARU
+```
+
+👤 Nama: ${namaPengguna}
+
+━━━━━━━━━━━━━━━━━━
+
+ PERTANYAAN 1
+
+Apa hal yang paling sering membuat kamu senyum-senyum sendiri saat mengingatnya?
+
+${jwb1}
+
+━━━━━━━━━━━━━━━━━━
+
+ PERTANYAAN 2
+
+Kalau kita bisa pergi ke mana saja besok, ke mana kamu ingin ajak aku?
+
+${jwb2}
+
+━━━━━━━━━━━━━━━━━━
+
+ PERTANYAAN 3
+
+Apa harapanmu ke depannya?
+
+${jwb3}
+
+━━━━━━━━━━━━━━━━━━
+
+ PERTANYAAN 4
+
+Apa hal pertama yang terlintas di pikiranmu saat mendengar namaku?
+
+${jwb4}
+
+━━━━━━━━━━━━━━━━━━
+
+ PERTANYAAN 5
+
+Bagaimana cara terbaik aku bisa menemani dan mendukungmu?
+
+${jwb5}
+
+━━━━━━━━━━━━━━━━━━
+
+ Dikirim dari halaman istimewa `;
+
+```
+/* =========================================
+   BUKA WHATSAPP
+========================================= */
+
+const linkWhatsApp =
+    `https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(pesan)}`;
+
+
+window.open(linkWhatsApp, "_blank");
+
+
+/* =========================================
+   TAMPILKAN HALAMAN TERIMA KASIH
+========================================= */
+
+keHalaman("selesai");
+```
+
+}
