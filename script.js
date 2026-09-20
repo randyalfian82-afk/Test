@@ -1,161 +1,90 @@
-// Pertanyaan yang sudah kamu berikan
-const questions = [
-    "Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatkannya?",
-    "Kalau kita bisa pergi ke mana saja besok, ke mana kamu ingin ajak aku?",
-    "Apa harapanmu ke depannya?",
-    "Apa hal pertama yang terlintas di pikiranmu saat mendengar namaku?",
-    "Bagaimana cara terbaik aku bisa menemani dan mendukungmu?"
-];
+let namaPengguna = "";
 
-// State
-let currentQ = 0;
-let answers = [];
-let userName = "";
-let userDob = "";
-let photos = [];
+// === GANTI NOMOR WHATSAPP DI BAWAH INI ===
+// Contoh: 6281234567890 (pakai 62 di depan, tanpa tanda +)
+const NOMOR_WA = "6289508350068";
+// =========================================
 
-// Elemen halaman
-const pages = {
-    login: document.getElementById('loginPage'),
-    quiz: document.getElementById('quizPage'),
-    camera: document.getElementById('cameraPage'),
-    result: document.getElementById('resultPage')
-};
+function masuk() {
+    const nama = document.getElementById('namaLengkap').value.trim();
+    const tgl = document.getElementById('tanggalLahir').value.trim();
 
-// Pindah halaman
-function showPage(name) {
-    Object.values(pages).forEach(p => p.classList.remove('active'));
-    pages[name].classList.add('active');
+    if (nama === "" || tgl === "") {
+        alert("Silakan isi nama dan tanggal lahir terlebih dahulu ya 💗");
+        return;
+    }
+
+    namaPengguna = nama;
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById(`nama${i}`).innerText = `Halo, ${nama} 💐`;
+    }
+
+    keHalaman(1);
 }
 
-// 1. Halaman masuk
-document.getElementById('loginForm').addEventListener('submit', e => {
-    e.preventDefault();
-    userName = document.getElementById('nama').value.trim();
-    userDob = document.getElementById('tglLahir').value.trim();
-    
-    if (!userName || !userDob) return;
-    
-    document.getElementById('displayNama').textContent = userName;
-    document.getElementById('resultName').textContent = `Untuk: ${userName}`;
-    
-    currentQ = 0;
-    answers = [];
-    loadQuestion();
-    showPage('quiz');
-});
+function keHalaman(nomor) {
+    document.querySelectorAll('.container').forEach(el => {
+        el.classList.remove('active');
+    });
 
-// Muat pertanyaan
-function loadQuestion() {
-    document.getElementById('questionNumber').textContent = `PERTANYAAN ${currentQ + 1} / ${questions.length}`;
-    document.getElementById('questionText').textContent = questions[currentQ];
-    document.getElementById('answer').value = '';
-}
-
-// 2. Jawab pertanyaan
-document.getElementById('quizForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const jawab = document.getElementById('answer').value.trim();
-    if (!jawab) return;
-    
-    answers.push(jawab);
-    currentQ++;
-    
-    if (currentQ < questions.length) {
-        loadQuestion();
+    if (nomor === 'login') {
+        document.getElementById('loginPage').classList.add('active');
+    } else if (nomor === 'selesai') {
+        document.getElementById('namaSelesai').innerText = namaPengguna;
+        document.getElementById('terimaKasih').classList.add('active');
     } else {
-        // Selesai tanya → ke kamera
-        startCamera();
-        showPage('camera');
-    }
-});
-
-// 3. Kamera
-const video = document.getElementById('camera');
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-let stream;
-
-async function startCamera() {
-    photos = [];
-    document.getElementById('photoCounter').textContent = `0 / 6 FOTO`;
-    try {
-        stream = await navigator.mediaDevices.getUserMedia({ 
-            video: { facingMode: 'user', width: 1280, height: 720 } 
-        });
-        video.srcObject = stream;
-    } catch (err) {
-        document.getElementById('cameraError').textContent = "Izinkan akses kamera ya ♡";
+        document.getElementById(`page${nomor}`).classList.add('active');
     }
 }
 
-document.getElementById('snapButton').addEventListener('click', async () => {
-    for (let i = 0; i < 6; i++) {
-        await countdown(3);
-        capturePhoto();
-        document.getElementById('photoCounter').textContent = `${photos.length} / 6 FOTO`;
-        if (photos.length === 6) break;
+function kirimSemua() {
+    // Cek semua pertanyaan sudah diisi
+    for (let i = 1; i <= 5; i++) {
+        if (document.getElementById(`jawab${i}`).value.trim() === "") {
+            alert(`Pertanyaan ke-${i} belum diisi ya 💗`);
+            keHalaman(i);
+            return;
+        }
     }
-    if (stream) stream.getTracks().forEach(t => t.stop());
-    showResults();
-    showPage('result');
-});
 
-function countdown(sec) {
-    return new Promise(res => {
-        const el = document.getElementById('countdown');
-        let s = sec;
-        el.textContent = s;
-        el.style.display = 'block';
-        const timer = setInterval(() => {
-            s--;
-            el.textContent = s || "📸";
-            if (s <= 0) {
-                clearInterval(timer);
-                el.style.display = 'none';
-                setTimeout(res, 300);
-            }
-        }, 1000);
-    });
+    // Ambil semua jawaban
+    const jwb1 = document.getElementById('jawab1').value.trim();
+    const jwb2 = document.getElementById('jawab2').value.trim();
+    const jwb3 = document.getElementById('jawab3').value.trim();
+    const jwb4 = document.getElementById('jawab4').value.trim();
+    const jwb5 = document.getElementById('jawab5').value.trim();
+    const tglLahir = document.getElementById('tanggalLahir').value.trim();
+
+    // Susun pesan yang akan dikirim ke WhatsApp
+    const pesan = `💌 Ada Jawaban Baru dari ${namaPengguna}
+
+📅 Tanggal Lahir: ${tglLahir}
+
+━━━━━━━━━━━━━━━━
+1. Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatkannya?
+${jwb1}
+
+2. Kalau kita bisa pergi ke mana saja besok, ke mana kamu ingin ajak aku?
+${jwb2}
+
+3. Apa harapanmu ke depannya?
+${jwb3}
+
+4. Apa hal pertama yang terlintas di pikiranmu saat mendengar namaku?
+${jwb4}
+
+5. Bagaimana cara terbaik aku bisa menemani dan mendukungmu?
+${jwb5}
+━━━━━━━━━━━━━━━━
+
+Dikirim dari halaman istimewa 💖`;
+
+    // Encode pesan untuk URL WhatsApp
+    const pesanEncoded = encodeURIComponent(pesan);
+
+    // Buka WhatsApp
+    window.open(`https://wa.me/${NOMOR_WA}?text=${pesanEncoded}`, '_blank');
+
+    // Tampilkan halaman terima kasih
+    keHalaman('selesai');
 }
-
-function capturePhoto() {
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    ctx.drawImage(video, 0, 0);
-    const imgData = canvas.toDataURL('image/jpeg', 0.9);
-    photos.push(imgData);
-    document.getElementById(`result${photos.length - 1}`).src = imgData;
-}
-
-// 4. Tampilkan hasil
-function showResults() {
-    // Tampilkan jawaban
-    const container = document.getElementById('allAnswers');
-    container.innerHTML = '';
-    questions.forEach((q, i) => {
-        const div = document.createElement('div');
-        div.className = 'answer-item';
-        div.innerHTML = `<p><strong>${q}</strong></p><p>${answers[i]}</p>`;
-        container.appendChild(div);
-    });
-    
-    // Tanggal
-    const now = new Date();
-    const tgl = now.toLocaleDateString('id-ID', {
-        day: 'numeric', month: 'long', year: 'numeric'
-    });
-    document.getElementById('date1').textContent = tgl;
-    document.getElementById('date2').textContent = tgl;
-}
-
-// Unduh & Ulangi
-document.getElementById('restartButton').addEventListener('click', () => {
-    photos = [];
-    answers = [];
-    showPage('login');
-});
-
-document.getElementById('downloadButton').addEventListener('click', () => {
-    alert('Fitur unduh siap! 💌');
-});
