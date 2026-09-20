@@ -1,85 +1,89 @@
 let namaPengguna = "";
-
-// === GANTI NOMOR WHATSAPP DI BAWAH INI ===
-// Contoh: 6281234567890 (pakai 62 di depan, tanpa tanda +)
+// === GANTI NOMOR WHATSAPP KAMU ===
 const NOMOR_WA = "6289508350068";
-// =========================================
+// =================================
 
-function masuk() {
+// Tampilkan halaman tertentu
+function tampilHalaman(id) {
+    document.querySelectorAll('.page').forEach(p => {
+        p.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
+}
+
+// Ambil semua isian & kirim ke WA
+function kirimKeWA() {
     const nama = document.getElementById('namaLengkap').value.trim();
     const tgl = document.getElementById('tanggalLahir').value.trim();
+    const j1 = document.getElementById('jawab1').value.trim();
+    const j2 = document.getElementById('jawab2').value.trim();
+    const j3 = document.getElementById('jawab3').value.trim();
+    const j4 = document.getElementById('jawab4').value.trim();
+    const j5 = document.getElementById('jawab5').value.trim();
 
-    if (nama === "" || tgl === "") {
-        alert("Silakan isi nama dan tanggal lahir terlebih dahulu ya 💗");
-        return;
+    // Cek semua terisi
+    if (!j1 || !j2 || !j3 || !j4 || !j5) {
+        alert("Ada pertanyaan yang belum diisi ya 💗");
+        return false;
     }
 
-    namaPengguna = nama;
-    for (let i = 1; i <= 5; i++) {
-        document.getElementById(`nama${i}`).innerText = `Halo, ${nama} 💐`;
-    }
-
-    keHalaman(1);
-}
-
-function keHalaman(nomor) {
-    document.querySelectorAll('.container').forEach(el => {
-        el.classList.remove('active');
-    });
-
-    if (nomor === 'login') {
-        document.getElementById('loginPage').classList.add('active');
-    } else if (nomor === 'selesai') {
-        document.getElementById('namaSelesai').innerText = namaPengguna;
-        document.getElementById('terimaKasih').classList.add('active');
-    } else {
-        document.getElementById(`page${nomor}`).classList.add('active');
-    }
-}
-
-function kirimSemua() {
-    // Cek semua pertanyaan sudah diisi
-    for (let i = 1; i <= 5; i++) {
-        if (document.getElementById(`jawab${i}`).value.trim() === "") {
-            alert(`Pertanyaan ke-${i} belum diisi ya 💗`);
-            keHalaman(i);
-            return;
-        }
-    }
-
-    // Ambil semua jawaban
-    const jwb1 = document.getElementById('jawab1').value.trim();
-    const jwb2 = document.getElementById('jawab2').value.trim();
-    const jwb3 = document.getElementById('jawab3').value.trim();
-    const jwb4 = document.getElementById('jawab4').value.trim();
-    const jwb5 = document.getElementById('jawab5').value.trim();
-    const tglLahir = document.getElementById('tanggalLahir').value.trim();
-
-    // Susun pesan yang akan dikirim ke WhatsApp
-    const pesan = `Ada Jawaban Baru dari ${namaPengguna}
+    const teks = `Jawaban dari ${nama}
 
 1. Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatkannya?
-${jwb1}
+${j1}
 
-2. Kalau kita bisa pergi ke mana saja besok, ke mana kamu ingin ajak aku?
-${jwb2}
+2. Kalau bisa ke mana saja besok, ke mana ajak aku?
+${j2}
 
 3. Apa harapanmu ke depannya?
-${jwb3}
+${j3}
 
-4. Apa hal pertama yang terlintas di pikiranmu saat mendengar namaku?
-${jwb4}
+4. Apa yang terlintas saat dengar namaku?
+${j4}
 
-5. Bagaimana cara terbaik aku bisa menemani dan mendukungmu?
-${jwb5}
+5. Bagaimana cara aku menemani & mendukungmu?
+${j5}
 
+—— Dikirim dari halaman istimewa  ——`;
 
-    // Encode pesan untuk URL WhatsApp
-    const pesanEncoded = encodeURIComponent(pesan);
-
-    // Buka WhatsApp
-    window.open(`https://wa.me/${NOMOR_WA}?text=${pesanEncoded}`, '_blank');
-
-    // Tampilkan halaman terima kasih
-    keHalaman('selesai');
+    window.open(`https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(teks)}`, '_blank');
+    document.getElementById('namaSelesai').innerText = nama;
+    tampilHalaman('selesai');
+    return true;
 }
+
+// Jalankan setelah halaman siap
+document.addEventListener('DOMContentLoaded', function() {
+    // Tombol Masuk
+    document.getElementById('btnMasuk').addEventListener('click', function() {
+        const nama = document.getElementById('namaLengkap').value.trim();
+        const tgl = document.getElementById('tanggalLahir').value.trim();
+        
+        if (!nama || !tgl) {
+            alert("Isi nama dan tanggal lahir dulu ya 💗");
+            return;
+        }
+        
+        namaPengguna = nama;
+        for (let i = 1; i <= 5; i++) {
+            const el = document.getElementById(`nama${i}`);
+            if (el) el.innerText = `Halo, ${nama} 💐`;
+        }
+        
+        tampilHalaman('page1');
+    });
+
+    // Navigasi antar halaman
+    document.getElementById('btnKe2').addEventListener('click', () => tampilHalaman('page2'));
+    document.getElementById('btnKe3').addEventListener('click', () => tampilHalaman('page3'));
+    document.getElementById('btnKe4').addEventListener('click', () => tampilHalaman('page4'));
+    document.getElementById('btnKe5').addEventListener('click', () => tampilHalaman('page5'));
+    
+    document.getElementById('btnKeDari2Ke1').addEventListener('click', () => tampilHalaman('page1'));
+    document.getElementById('btnKeDari3Ke2').addEventListener('click', () => tampilHalaman('page2'));
+    document.getElementById('btnKeDari4Ke3').addEventListener('click', () => tampilHalaman('page3'));
+    document.getElementById('btnKeDari5Ke4').addEventListener('click', () => tampilHalaman('page4'));
+    
+    // Tombol Kirim
+    document.getElementById('btnKirim').addEventListener('click', kirimKeWA);
+});
