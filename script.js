@@ -3,15 +3,18 @@ let namaPengguna = "";
 const NOMOR_WA = "6289508350068";
 // =================================
 
-// Tampilkan halaman tertentu
-function tampilHalaman(id) {
-    document.querySelectorAll('.page').forEach(p => {
-        p.classList.remove('active');
+function gantiHalaman(idTujuan) {
+    // Sembunyikan SEMUA halaman
+    document.querySelectorAll('.container').forEach(c => {
+        c.classList.remove('active');
+        c.classList.add('hidden');
     });
-    document.getElementById(id).classList.add('active');
+    // Tampilkan halaman tujuan
+    const halaman = document.getElementById(idTujuan);
+    halaman.classList.remove('hidden');
+    halaman.classList.add('active');
 }
 
-// Ambil semua isian & kirim ke WA
 function kirimKeWA() {
     const nama = document.getElementById('namaLengkap').value.trim();
     const tgl = document.getElementById('tanggalLahir').value.trim();
@@ -21,69 +24,68 @@ function kirimKeWA() {
     const j4 = document.getElementById('jawab4').value.trim();
     const j5 = document.getElementById('jawab5').value.trim();
 
-    // Cek semua terisi
     if (!j1 || !j2 || !j3 || !j4 || !j5) {
         alert("Ada pertanyaan yang belum diisi ya 💗");
-        return false;
+        return;
     }
 
-    const teks = `Jawaban dari ${nama}
+    const pesan = `Jawaban dari ${nama}
 
-1. Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatkannya?
+1. Apa hal yang paling sering senyum-senyum sendiri?
 ${j1}
 
-2. Kalau bisa ke mana saja besok, ke mana ajak aku?
+2. Ke mana ingin ajak aku pergi?
 ${j2}
 
 3. Apa harapanmu ke depannya?
 ${j3}
 
-4. Apa yang terlintas saat dengar namaku?
+4. Apa yang terlintas dengar namaku?
 ${j4}
 
-5. Bagaimana cara aku menemani & mendukungmu?
+5. Bagaimana cara menemani & mendukungmu?
 ${j5}
 
 —— Dikirim dari halaman istimewa  ——`;
 
-    window.open(`https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(teks)}`, '_blank');
+    window.open(`https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(pesan)}`, '_blank');
     document.getElementById('namaSelesai').innerText = nama;
-    tampilHalaman('selesai');
-    return true;
+    gantiHalaman('selesai');
 }
 
-// Jalankan setelah halaman siap
 document.addEventListener('DOMContentLoaded', function() {
+    // Halaman awal
+    document.getElementById('loginPage').classList.remove('hidden');
+    document.getElementById('loginPage').classList.add('active');
+
     // Tombol Masuk
     document.getElementById('btnMasuk').addEventListener('click', function() {
         const nama = document.getElementById('namaLengkap').value.trim();
         const tgl = document.getElementById('tanggalLahir').value.trim();
-        
         if (!nama || !tgl) {
             alert("Isi nama dan tanggal lahir dulu ya 💗");
             return;
         }
-        
         namaPengguna = nama;
         for (let i = 1; i <= 5; i++) {
             const el = document.getElementById(`nama${i}`);
             if (el) el.innerText = `Halo, ${nama} 💐`;
         }
-        
-        tampilHalaman('page1');
+        gantiHalaman('page1');
     });
 
-    // Navigasi antar halaman
-    document.getElementById('btnKe2').addEventListener('click', () => tampilHalaman('page2'));
-    document.getElementById('btnKe3').addEventListener('click', () => tampilHalaman('page3'));
-    document.getElementById('btnKe4').addEventListener('click', () => tampilHalaman('page4'));
-    document.getElementById('btnKe5').addEventListener('click', () => tampilHalaman('page5'));
-    
-    document.getElementById('btnKeDari2Ke1').addEventListener('click', () => tampilHalaman('page1'));
-    document.getElementById('btnKeDari3Ke2').addEventListener('click', () => tampilHalaman('page2'));
-    document.getElementById('btnKeDari4Ke3').addEventListener('click', () => tampilHalaman('page3'));
-    document.getElementById('btnKeDari5Ke4').addEventListener('click', () => tampilHalaman('page4'));
-    
-    // Tombol Kirim
+    // Navigasi maju
+    document.getElementById('btnKe2').addEventListener('click', () => gantiHalaman('page2'));
+    document.getElementById('btnKe3').addEventListener('click', () => gantiHalaman('page3'));
+    document.getElementById('btnKe4').addEventListener('click', () => gantiHalaman('page4'));
+    document.getElementById('btnKe5').addEventListener('click', () => gantiHalaman('page5'));
+
+    // Navigasi kembali
+    document.getElementById('btnDari2Ke1').addEventListener('click', () => gantiHalaman('page1'));
+    document.getElementById('btnDari3Ke2').addEventListener('click', () => gantiHalaman('page2'));
+    document.getElementById('btnDari4Ke3').addEventListener('click', () => gantiHalaman('page3'));
+    document.getElementById('btnDari5Ke4').addEventListener('click', () => gantiHalaman('page4'));
+
+    // Kirim
     document.getElementById('btnKirim').addEventListener('click', kirimKeWA);
 });
