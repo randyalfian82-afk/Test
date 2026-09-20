@@ -1,343 +1,231 @@
+```html
 <!DOCTYPE html>
-
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>Untuk Kamu 💖</title>
+    <title>Something For You ❤️</title>
 
-<link rel="stylesheet" href="style.css">
-```
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-```
-<!-- =========================
-     HALAMAN LOGIN
-========================== -->
-<div class="container active" id="loginPage">
+    <!-- BACKGROUND -->
+    <div class="background">
 
-    <div class="heart">💝</div>
+        <div class="glow glow-one"></div>
+        <div class="glow glow-two"></div>
 
-    <h1>Sebuah Halaman Istimewa Untukmu</h1>
+        <!-- Floating Hearts -->
+        <div class="heart heart-1">♥</div>
+        <div class="heart heart-2">♡</div>
+        <div class="heart heart-3">♥</div>
+        <div class="heart heart-4">♡</div>
+        <div class="heart heart-5">♥</div>
+        <div class="heart heart-6">♡</div>
+        <div class="heart heart-7">♥</div>
+        <div class="heart heart-8">♡</div>
 
-    <p class="subtitle">
-        Silakan isi dulu ya, agar aku tahu ini untuk siapa 💌
-    </p>
-
-    <div class="input-group">
-
-        <input
-            type="text"
-            id="namaLengkap"
-            placeholder="Nama Lengkap Kamu"
-            autocomplete="off"
-        >
-
-        <input
-            type="text"
-            id="tanggalLahir"
-            placeholder="Contoh: 01 Januari 2000"
-            autocomplete="off"
-        >
+        <!-- Stars -->
+        <div class="star star-1"></div>
+        <div class="star star-2"></div>
+        <div class="star star-3"></div>
+        <div class="star star-4"></div>
+        <div class="star star-5"></div>
+        <div class="star star-6"></div>
+        <div class="star star-7"></div>
 
     </div>
 
-    <button type="button" onclick="masuk()">
-        Mulai Bersama 💗
-    </button>
 
-</div>
+    <!-- MAIN -->
+    <main class="wrapper">
 
 
-<!-- =========================
-     HALAMAN 1
-========================== -->
-<div class="container" id="page1">
+        <!-- ================= LOGIN ================= -->
 
-    <div class="heart">💖</div>
+        <section class="card" id="loginPage">
 
-    <h1 id="nama1"></h1>
+            <div class="main-heart">
+                ❤️
+            </div>
 
-    <p class="subtitle">
-        Mari kita mulai pelan-pelan ya...
-    </p>
+            <h1>Hai, Kamu...</h1>
 
-    <div class="question-text">
-
-        <p>
-            <strong>1 dari 5</strong><br>
-            Apa hal yang paling sering membuat kamu
-            senyum-senyum sendiri saat mengingatnya?
-        </p>
-
-        <textarea
-            id="jawab1"
-            placeholder="Tulis apa yang ada di hatimu..."
-        ></textarea>
-
-    </div>
-
-    <button type="button" onclick="keHalaman(2)">
-        Lanjut →
-    </button>
-
-    <p class="progress">
-        Pertanyaan 1/5
-    </p>
-
-</div>
+            <p class="subtitle">
+                Ada sedikit sesuatu yang ingin aku tanyakan.
+                <br>
+                Tenang, tidak ada jawaban yang salah. ✨
+            </p>
 
 
-<!-- =========================
-     HALAMAN 2
-========================== -->
-<div class="container" id="page2">
+            <!-- Nama -->
+            <div class="form-group">
 
-    <div class="heart">✨</div>
+                <label for="nama">
+                    Nama Kamu
+                </label>
 
-    <h1 id="nama2"></h1>
+                <input
+                    type="text"
+                    id="nama"
+                    placeholder="Nama Lengkap"
+                    autocomplete="off"
+                >
 
-    <p class="subtitle">
-        Masih ada beberapa lagi, santai saja 💫
-    </p>
+            </div>
 
-    <div class="question-text">
 
-        <p>
-            <strong>2 dari 5</strong><br>
-            Kalau kita bisa pergi ke mana saja besok,
-            ke mana kamu ingin ajak aku?
-        </p>
+            <!-- Tanggal Lahir -->
+            <div class="form-group">
 
-        <textarea
-            id="jawab2"
-            placeholder="Ceritakan tempat impianmu..."
-        ></textarea>
+                <label for="tanggalLahir">
+                    Tanggal Lahir
+                </label>
 
-    </div>
+                <input
+                    type="text"
+                    id="tanggalLahir"
+                    placeholder="Contoh: 01 Januari 2000"
+                    autocomplete="off"
+                >
 
-    <div class="btn-group">
+            </div>
 
-        <button
-            type="button"
-            class="btn-back"
-            onclick="keHalaman(1)"
+
+            <button
+                class="btn"
+                id="loginButton"
+            >
+                Masuk ke sini ❤️
+            </button>
+
+
+            <div class="footer">
+                ✦ just a little something for you ✦
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= QUESTION ================= -->
+
+        <section
+            class="card hidden"
+            id="questionPage"
         >
-            ← Kembali
-        </button>
 
-        <button
-            type="button"
-            onclick="keHalaman(3)"
+            <div class="main-heart">
+                💌
+            </div>
+
+
+            <div
+                class="question-number"
+                id="questionNumber"
+            >
+                PERTANYAAN 1 DARI 5
+            </div>
+
+
+            <!-- Progress -->
+            <div class="progress-bg">
+
+                <div
+                    class="progress"
+                    id="progress"
+                ></div>
+
+            </div>
+
+
+            <!-- Question -->
+            <div
+                class="question"
+                id="questionText"
+            ></div>
+
+
+            <!-- Answer -->
+            <textarea
+                id="answer"
+                placeholder="Tulis apa yang kamu rasakan..."
+            ></textarea>
+
+
+            <button
+                class="btn"
+                id="nextButton"
+            >
+                Lanjut ❤️
+            </button>
+
+        </section>
+
+
+
+        <!-- ================= FINISH ================= -->
+
+        <section
+            class="card hidden"
+            id="finishPage"
         >
-            Lanjut →
-        </button>
 
-    </div>
-
-    <p class="progress">
-        Pertanyaan 2/5
-    </p>
-
-</div>
+            <div class="main-heart">
+                💖
+            </div>
 
 
-<!-- =========================
-     HALAMAN 3
-========================== -->
-<div class="container" id="page3">
-
-    <div class="heart">🌷</div>
-
-    <h1 id="nama3"></h1>
-
-    <p class="subtitle">
-        Aku ingin tahu apa yang kamu harapkan 💭
-    </p>
-
-    <div class="question-text">
-
-        <p>
-            <strong>3 dari 5</strong><br>
-            Apa harapanmu ke depannya?
-        </p>
-
-        <textarea
-            id="jawab3"
-            placeholder="Tulis harapanmu di sini..."
-        ></textarea>
-
-    </div>
-
-    <div class="btn-group">
-
-        <button
-            type="button"
-            class="btn-back"
-            onclick="keHalaman(2)"
-        >
-            ← Kembali
-        </button>
-
-        <button
-            type="button"
-            onclick="keHalaman(4)"
-        >
-            Lanjut →
-        </button>
-
-    </div>
-
-    <p class="progress">
-        Pertanyaan 3/5
-    </p>
-
-</div>
+            <h1 class="final-title">
+                Terima Kasih
+            </h1>
 
 
-<!-- =========================
-     HALAMAN 4
-========================== -->
-<div class="container" id="page4">
+            <p class="final-text">
 
-    <div class="heart">💗</div>
+                Semua pertanyaan sudah kamu jawab,
+                <span
+                    class="name"
+                    id="finalName"
+                ></span>.
 
-    <h1 id="nama4"></h1>
+                <br><br>
 
-    <p class="subtitle">
-        Hampir selesai, tetap bersamaku ya 💞
-    </p>
+                Sekarang tinggal satu langkah kecil lagi...
 
-    <div class="question-text">
+                <br>
 
-        <p>
-            <strong>4 dari 5</strong><br>
-            Apa hal pertama yang terlintas di pikiranmu
-            saat mendengar namaku?
-        </p>
+                Kirim semua jawabanmu ke aku. ❤️
 
-        <textarea
-            id="jawab4"
-            placeholder="Apa yang muncul di pikiranmu..."
-        ></textarea>
-
-    </div>
-
-    <div class="btn-group">
-
-        <button
-            type="button"
-            class="btn-back"
-            onclick="keHalaman(3)"
-        >
-            ← Kembali
-        </button>
-
-        <button
-            type="button"
-            onclick="keHalaman(5)"
-        >
-            Lanjut →
-        </button>
-
-    </div>
-
-    <p class="progress">
-        Pertanyaan 4/5
-    </p>
-
-</div>
+            </p>
 
 
-<!-- =========================
-     HALAMAN 5
-========================== -->
-<div class="container" id="page5">
-
-    <div class="heart">💌</div>
-
-    <h1 id="nama5"></h1>
-
-    <p class="subtitle">
-        Pertanyaan terakhir, yang juga sangat berharga 💍
-    </p>
-
-    <div class="question-text">
-
-        <p>
-            <strong>5 dari 5</strong><br>
-            Bagaimana cara terbaik aku bisa menemani
-            dan mendukungmu?
-        </p>
-
-        <textarea
-            id="jawab5"
-            placeholder="Beri tahu aku caranya..."
-        ></textarea>
-
-    </div>
-
-    <div class="btn-group">
-
-        <button
-            type="button"
-            class="btn-back"
-            onclick="keHalaman(4)"
-        >
-            ← Kembali
-        </button>
-
-        <button
-            type="button"
-            onclick="kirimSemua()"
-        >
-            Kirim Semua Jawaban 💌
-        </button>
-
-    </div>
-
-    <p class="progress">
-        Pertanyaan 5/5
-    </p>
-
-</div>
+            <!-- WhatsApp -->
+            <button
+                class="btn whatsapp-btn"
+                id="whatsappButton"
+            >
+                💬 Kirim Jawaban ke WhatsApp
+            </button>
 
 
-<!-- =========================
-     HALAMAN TERIMA KASIH
-========================== -->
-<div class="container" id="terimaKasih">
+            <div class="footer">
+                Made with ❤️
+            </div>
 
-    <div class="heart">💕</div>
+        </section>
 
-    <h1>
-        Terima Kasih,
-        <span id="namaSelesai"></span>
-        💐
-    </h1>
-
-    <p class="subtitle">
-        Jawabanmu sudah dikirim ke WhatsApp 💌
-    </p>
-
-    <p class="closing-text">
-        Terima kasih sudah berbagi isi hatimu denganku.
-        <br>
-        Setiap kata sangat berharga.
-        <br>
-        Semoga hari-harimu selalu indah 🌷✨
-    </p>
-
-</div>
+    </main>
 
 
-<script src="script.js"></script>
-```
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
 
 </body>
+
 </html>
+```
