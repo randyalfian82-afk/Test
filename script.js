@@ -1,305 +1,498 @@
-/* =========================================
-DATA PENGGUNA
-========================================= */
+```javascript
+/* ==================================================
+   PENGATURAN WHATSAPP
+================================================== */
 
-let namaPengguna = "";
+/*
+    GANTI NOMOR DI BAWAH INI.
 
-/* =========================================
-NOMOR WHATSAPP TUJUAN
-Ganti dengan nomor WhatsApp kamu.
+    Contoh nomor:
+    081234567890
 
-Format:
-628xxxxxxxxxx
+    Ditulis menjadi:
+    6281234567890
 
-Jangan gunakan:
-+62
-08
-spasi
-tanda -
-========================================= */
+    Jangan gunakan:
+    +62
+    spasi
+    tanda -
+*/
 
-const NOMOR_WA = "6289508350068";
+const nomorWhatsApp = "6289508350068";
 
-/* =========================================
-FUNGSI MASUK
-========================================= */
+
+/* ==================================================
+   PERTANYAAN
+================================================== */
+
+const questions = [
+
+    "Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatnya?",
+
+    "Kalau kita bisa pergi ke mana saja besok, ke mana kamu ingin ajak aku?",
+
+    "Apa harapanmu ke depannya?",
+
+    "Apa hal pertama yang terlintas di pikiranmu saat mendengar namaku?",
+
+    "Bagaimana cara terbaik aku bisa menemani dan mendukungmu?"
+
+];
+
+
+/* ==================================================
+   VARIABLE
+================================================== */
+
+let currentQuestion = 0;
+
+let userName = "";
+
+let userBirthday = "";
+
+let answers = [];
+
+
+/* ==================================================
+   ELEMENT
+================================================== */
+
+const loginPage =
+    document.getElementById("loginPage");
+
+const questionPage =
+    document.getElementById("questionPage");
+
+const finishPage =
+    document.getElementById("finishPage");
+
+const namaInput =
+    document.getElementById("nama");
+
+const birthdayInput =
+    document.getElementById("tanggalLahir");
+
+const questionText =
+    document.getElementById("questionText");
+
+const questionNumber =
+    document.getElementById("questionNumber");
+
+const progress =
+    document.getElementById("progress");
+
+const answerInput =
+    document.getElementById("answer");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const finalName =
+    document.getElementById("finalName");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const whatsappButton =
+    document.getElementById("whatsappButton");
+
+
+/* ==================================================
+   LOGIN
+================================================== */
 
 function masuk() {
 
-```
-const namaInput = document
-    .getElementById("namaLengkap");
+    const nama =
+        namaInput
+        .value
+        .trim();
 
-const tanggalInput = document
-    .getElementById("tanggalLahir");
-
-const nama = namaInput.value.trim();
-const tanggalLahir = tanggalInput.value.trim();
-
-
-/* Cek input kosong */
-
-if (nama === "") {
-
-    alert("Nama kamu belum diisi ya 💗");
-
-    namaInput.focus();
-
-    return;
-}
+    const tanggal =
+        birthdayInput
+        .value
+        .trim();
 
 
-if (tanggalLahir === "") {
+    /*
+        Tidak ada pengecekan
+        tanggal lahir benar/salah.
 
-    alert("Tanggal lahir kamu belum diisi ya 💗");
+        Yang penting kedua kolom
+        tidak kosong.
+    */
 
-    tanggalInput.focus();
+    if (
+        nama === "" ||
+        tanggal === ""
+    ) {
 
-    return;
-}
-
-
-/* Simpan nama */
-
-namaPengguna = nama;
-
-
-/* Masukkan nama ke semua halaman */
-
-for (let i = 1; i <= 5; i++) {
-
-    const namaElement =
-        document.getElementById(`nama${i}`);
-
-    if (namaElement) {
-
-        namaElement.innerText =
-            `Halo, ${namaPengguna} 💐`;
-    }
-}
-
-
-/* Masuk ke halaman pertama */
-
-keHalaman(1);
-```
-
-}
-
-/* =========================================
-PINDAH HALAMAN
-========================================= */
-
-function keHalaman(nomor) {
-
-```
-/* Sembunyikan semua container */
-
-const semuaContainer =
-    document.querySelectorAll(".container");
-
-semuaContainer.forEach(function (element) {
-
-    element.classList.remove("active");
-
-});
-
-
-/* Jika halaman selesai */
-
-if (nomor === "selesai") {
-
-    document
-        .getElementById("namaSelesai")
-        .innerText = namaPengguna;
-
-    document
-        .getElementById("terimaKasih")
-        .classList.add("active");
-
-    return;
-}
-
-
-/* Tampilkan halaman yang dipilih */
-
-const halaman =
-    document.getElementById(`page${nomor}`);
-
-if (halaman) {
-
-    halaman.classList.add("active");
-}
-```
-
-}
-
-/* =========================================
-CEK JAWABAN
-========================================= */
-
-function cekJawaban(nomor) {
-
-```
-const textarea =
-    document.getElementById(`jawab${nomor}`);
-
-if (!textarea) {
-    return false;
-}
-
-const jawaban =
-    textarea.value.trim();
-
-
-if (jawaban === "") {
-
-    alert(
-        `Pertanyaan ke-${nomor} belum diisi ya 💗`
-    );
-
-    textarea.focus();
-
-    return false;
-}
-
-return true;
-```
-
-}
-
-/* =========================================
-KIRIM SEMUA JAWABAN
-========================================= */
-
-function kirimSemua() {
-
-```
-/* Cek semua pertanyaan */
-
-for (let i = 1; i <= 5; i++) {
-
-    if (!cekJawaban(i)) {
-
-        keHalaman(i);
+        alert(
+            "Isi nama dan tanggal lahir dulu ya ❤️"
+        );
 
         return;
+
     }
+
+
+    userName = nama;
+
+    userBirthday = tanggal;
+
+
+    loginPage
+        .classList
+        .add("hidden");
+
+
+    questionPage
+        .classList
+        .remove("hidden");
+
+
+    tampilkanPertanyaan();
+
+}
+
+
+/* ==================================================
+   TAMPILKAN PERTANYAAN
+================================================== */
+
+function tampilkanPertanyaan() {
+
+    /*
+        Restart animasi.
+    */
+
+    questionPage
+        .classList
+        .remove("question-page");
+
+    void questionPage.offsetWidth;
+
+    questionPage
+        .classList
+        .add("question-page");
+
+
+    /*
+        Tampilkan pertanyaan.
+    */
+
+    questionText
+        .textContent =
+        questions[currentQuestion];
+
+
+    /*
+        Nomor pertanyaan.
+    */
+
+    questionNumber
+        .textContent =
+        `PERTANYAAN ${currentQuestion + 1} DARI ${questions.length}`;
+
+
+    /*
+        Progress bar.
+    */
+
+    const percentage =
+        (
+            (currentQuestion + 1)
+            /
+            questions.length
+        ) * 100;
+
+
+    progress.style.width =
+        percentage + "%";
+
+
+    /*
+        Kosongkan jawaban.
+    */
+
+    answerInput.value = "";
+
+
+    /*
+        Tombol pertanyaan terakhir.
+    */
+
+    if (
+        currentQuestion ===
+        questions.length - 1
+    ) {
+
+        nextButton.textContent =
+            "Selesai ❤️";
+
+    } else {
+
+        nextButton.textContent =
+            "Lanjut ❤️";
+
+    }
+
 }
 
 
-/* Ambil tanggal lahir */
+/* ==================================================
+   NEXT QUESTION
+================================================== */
 
-const tanggalLahir =
-    document
-        .getElementById("tanggalLahir")
+function nextQuestion() {
+
+    const answer =
+        answerInput
         .value
         .trim();
 
 
-/* Ambil semua jawaban */
+    /*
+        Jawaban tidak boleh kosong.
+    */
 
-const jwb1 =
-    document
-        .getElementById("jawab1")
-        .value
-        .trim();
+    if (answer === "") {
 
-const jwb2 =
-    document
-        .getElementById("jawab2")
-        .value
-        .trim();
+        alert(
+            "Jawab dulu ya ❤️"
+        );
 
-const jwb3 =
-    document
-        .getElementById("jawab3")
-        .value
-        .trim();
+        answerInput.focus();
 
-const jwb4 =
-    document
-        .getElementById("jawab4")
-        .value
-        .trim();
+        return;
 
-const jwb5 =
-    document
-        .getElementById("jawab5")
-        .value
-        .trim();
+    }
 
 
-/* =========================================
-   PESAN WHATSAPP
-========================================= */
+    /*
+        Simpan jawaban.
+    */
 
-const pesan = `JAWABAN BARU
-```
-
-👤 Nama: ${namaPengguna}
-
-━━━━━━━━━━━━━━━━━━
-
- PERTANYAAN 1
-
-Apa hal yang paling sering membuat kamu senyum-senyum sendiri saat mengingatnya?
-
-${jwb1}
-
-━━━━━━━━━━━━━━━━━━
-
- PERTANYAAN 2
-
-Kalau kita bisa pergi ke mana saja besok, ke mana kamu ingin ajak aku?
-
-${jwb2}
-
-━━━━━━━━━━━━━━━━━━
-
- PERTANYAAN 3
-
-Apa harapanmu ke depannya?
-
-${jwb3}
-
-━━━━━━━━━━━━━━━━━━
-
- PERTANYAAN 4
-
-Apa hal pertama yang terlintas di pikiranmu saat mendengar namaku?
-
-${jwb4}
-
-━━━━━━━━━━━━━━━━━━
-
- PERTANYAAN 5
-
-Bagaimana cara terbaik aku bisa menemani dan mendukungmu?
-
-${jwb5}
-
-━━━━━━━━━━━━━━━━━━
-
- Dikirim dari halaman istimewa `;
-
-```
-/* =========================================
-   BUKA WHATSAPP
-========================================= */
-
-const linkWhatsApp =
-    `https://wa.me/${NOMOR_WA}?text=${encodeURIComponent(pesan)}`;
+    answers.push(answer);
 
 
-window.open(linkWhatsApp, "_blank");
+    /*
+        Pindah pertanyaan.
+    */
+
+    currentQuestion++;
 
 
-/* =========================================
-   TAMPILKAN HALAMAN TERIMA KASIH
-========================================= */
+    /*
+        Masih ada pertanyaan?
+    */
 
-keHalaman("selesai");
-```
+    if (
+        currentQuestion <
+        questions.length
+    ) {
+
+        tampilkanPertanyaan();
+
+    } else {
+
+        tampilkanSelesai();
+
+    }
 
 }
+
+
+/* ==================================================
+   SELESAI
+================================================== */
+
+function tampilkanSelesai() {
+
+    questionPage
+        .classList
+        .add("hidden");
+
+
+    finishPage
+        .classList
+        .remove("hidden");
+
+
+    finalName
+        .textContent =
+        userName;
+
+}
+
+
+/* ==================================================
+   KIRIM WHATSAPP
+================================================== */
+
+function kirimWhatsApp() {
+
+    /*
+        Membuat pesan awal.
+    */
+
+    let pesan =
+
+`💌 *ADA YANG MAU AKU CERITAKAN...*
+
+Halo ❤️
+
+👤 Nama:
+*${userName}*
+
+🎂 Tanggal Lahir:
+*${userBirthday}*
+
+━━━━━━━━━━━━━━━━━━
+`;
+
+
+    /*
+        Masukkan semua pertanyaan
+        dan jawaban.
+    */
+
+    questions.forEach(
+        (question, index) => {
+
+            pesan +=
+
+`
+
+❤️ *PERTANYAAN ${index + 1}*
+
+${question}
+
+💭 *Jawaban:*
+${answers[index]}
+
+━━━━━━━━━━━━━━━━━━`;
+
+        }
+    );
+
+
+    /*
+        Penutup pesan.
+    */
+
+    pesan +=
+
+`
+
+✨ Terima kasih sudah menjawab semuanya.
+
+— sent with love ❤️`;
+
+
+    /*
+        Encode pesan.
+    */
+
+    const encodedMessage =
+        encodeURIComponent(pesan);
+
+
+    /*
+        Buat link WhatsApp.
+    */
+
+    const whatsappURL =
+        `https://wa.me/${nomorWhatsApp}?text=${encodedMessage}`;
+
+
+    /*
+        Buka WhatsApp.
+    */
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+
+/* ==================================================
+   EVENT LISTENER
+================================================== */
+
+loginButton.addEventListener(
+    "click",
+    masuk
+);
+
+
+nextButton.addEventListener(
+    "click",
+    nextQuestion
+);
+
+
+whatsappButton.addEventListener(
+    "click",
+    kirimWhatsApp
+);
+
+
+/* ==================================================
+   ENTER UNTUK LOGIN
+================================================== */
+
+namaInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            birthdayInput.focus();
+
+        }
+
+    }
+);
+
+
+birthdayInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            masuk();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   CTRL + ENTER UNTUK JAWABAN
+================================================== */
+
+answerInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.ctrlKey &&
+            event.key === "Enter"
+        ) {
+
+            nextQuestion();
+
+        }
+
+    }
+);
+```
