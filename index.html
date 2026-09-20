@@ -11,27 +11,27 @@
     <!-- Halaman Masuk -->
     <div class="container active" id="loginPage">
         <div class="heart">💝</div>
-        <h1>Sebuah Halaman Istimewa untukmu</h1>
-        <p class="subtitle">Silakan isi dulu ya, agar aku tahu ini untuk siapa 💌</p>
+        <h1>Sebuah Question Istimewa untukmu</h1>
+        <p class="subtitle">Silakan isi dulu ya, biar aku tahu ini dari siapa 💌</p>
 
         <input type="text" id="namaLengkap" placeholder="Nama Lengkap Kamu" required>
         <input type="text" id="tanggalLahir" placeholder="Contoh: 01 Januari 2000" required>
 
-        <button onclick="masuk()">Mulai Bersama 💗</button>
+        <button onclick="masuk()">Masuk 💗</button>
     </div>
 
     <!-- Halaman Pertanyaan 1 -->
     <div class="container" id="page1">
         <div class="heart">💖</div>
         <h1 id="nama1"></h1>
-        <p class="subtitle">Mari kita mulai pelan-pelan ya...</p>
+        <p class="subtitle">Mari kita masuk ke pertanyaan pertama...</p>
 
         <div class="question-text">
             <p><strong>1 dari 5</strong><br>Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatkannya?</p>
             <textarea id="jawab1" placeholder="Tulis apa yang ada di hatimu..."></textarea>
         </div>
 
-        <button onclick="keHalaman(2)">Lanjut ke Pertanyaan Berikutnya →</button>
+        <button onclick="keHalaman(2)">Next →</button>
         <p class="progress">Pertanyaan 1/5</p>
     </div>
 
@@ -47,8 +47,8 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-back" onclick="keHalaman(1)">← Kembali</button>
-            <button onclick="keHalaman(3)">Lanjut →</button>
+            <button class="btn-back" onclick="keHalaman(1)">← Return</button>
+            <button onclick="keHalaman(3)">Next →</button>
         </div>
         <p class="progress">Pertanyaan 2/5</p>
     </div>
@@ -65,8 +65,8 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-back" onclick="keHalaman(2)">← Kembali</button>
-            <button onclick="keHalaman(4)">Lanjut →</button>
+            <button class="btn-back" onclick="keHalaman(2)">← Return</button>
+            <button onclick="keHalaman(4)">Next →</button>
         </div>
         <p class="progress">Pertanyaan 3/5</p>
     </div>
@@ -83,8 +83,8 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-back" onclick="keHalaman(3)">← Kembali</button>
-            <button onclick="keHalaman(5)">Lanjut →</button>
+            <button class="btn-back" onclick="keHalaman(3)">← Return</button>
+            <button onclick="keHalaman(5)">Next →</button>
         </div>
         <p class="progress">Pertanyaan 4/5</p>
     </div>
@@ -101,7 +101,7 @@
         </div>
 
         <div class="btn-group">
-            <button class="btn-back" onclick="keHalaman(4)">← Kembali</button>
+            <button class="btn-back" onclick="keHalaman(4)">← Return</button>
             <button onclick="kirimSemua()">Kirim Semua Jawaban 💌</button>
         </div>
         <p class="progress">Pertanyaan 5/5</p>
