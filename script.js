@@ -56,11 +56,8 @@ function kirimSemua() {
     const tglLahir = document.getElementById('tanggalLahir').value.trim();
 
     // Susun pesan yang akan dikirim ke WhatsApp
-    const pesan = `💌 Ada Jawaban Baru dari ${namaPengguna}
+    const pesan = `Ada Jawaban Baru dari ${namaPengguna}
 
-📅 Tanggal Lahir: ${tglLahir}
-
-━━━━━━━━━━━━━━━━
 1. Apa hal yang paling sering kamu senyum-senyum sendiri saat mengingatkannya?
 ${jwb1}
 
@@ -75,9 +72,7 @@ ${jwb4}
 
 5. Bagaimana cara terbaik aku bisa menemani dan mendukungmu?
 ${jwb5}
-━━━━━━━━━━━━━━━━
 
-Dikirim dari halaman istimewa 💖`;
 
     // Encode pesan untuk URL WhatsApp
     const pesanEncoded = encodeURIComponent(pesan);
