@@ -1,1 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap');
 
+:root {
+    --pink-soft: #ffe6ec;
+    --pink-light: #ffd6e0;
+    --pink-main: #ff6b8b;
+    --pink-dark: #d6486e;
+    --rose: #b8325c;
+    --text-dark: #4a2030;
+    --text-light: #7a4458;
+    --bg-grad: linear-gradient(135deg, #fff0f5, #ffe6ee, #ffd9e6);
+    --shadow: 0 8px 32px rgba(184, 50, 92, 0.15);
+    --radius: 20px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-grad);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Dekorasi */
+.heart-decoration {
+    text-align: center;
+    color: var(--pink-main);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin: 1rem 0;
+    opacity: 0.8;
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.login-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 30%, rgba(255,182,193,0.3), transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,192,203,0.3), transparent 50%);
+    z-index: 0;
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    border: 2px solid rgba(255, 182, 193, 0.4);
+}
+
+.heart-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.heart-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--pink-main), var(--rose));
+    color: white;
+    padding: 0.3rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.login-card h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: var(--rose);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+label {
+    text-align: left;
+    font-weight: 600;
+    color: var(--rose);
+    font-size: 0.9rem;
+}
+
+input, textarea {
+    padding: 0.9rem 1.2rem;
+    border: 2px solid var(--pink-light);
+    border-radius: 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--pink-main);
+    box-shadow: 0 0 0 4px rgba(255, 107, 139, 0.15);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.main-button {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(90deg, var(--pink-main), var(--rose));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.main-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(214, 72, 110, 0.3);
+}
+
+/* Halaman Pertanyaan */
+.quiz-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    max-width: 520px;
+    width: 100%;
+    border: 2px solid rgba(255, 182, 193, 0.4);
+}
+
+.user-badge {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--rose);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.question-number {
+    text-align: center;
+    color: var(--pink-main);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.quiz-card h2 {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* Halaman Kamera */
+.booth-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.booth-header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+}
+
+.photo-counter {
+    margin-top: 0.5rem;
+    font-weight: 600;
+    color: var(--pink-main);
+}
+
+.camera-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 4px solid var(--pink-light);
+    box-shadow: var(--shadow);
+    background: #222;
+}
+
+.live-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 107, 139, 0.8);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    z-index: 2;
+}
+
+video, canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#countdown {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    z-index: 3;
+}
+
+.camera-button {
+    display: block;
+    margin: 1.5rem auto;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, var(--pink-main), var(--rose));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.camera-button:hover {
+    transform: scale(1.05);
+}
+
+.error-message {
+    text-align: center;
+    color: #d63031;
+    margin-top: 1rem;
+}
+
+/* Halaman Hasil */
+.result-page {
+    padding-bottom: 4rem;
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.result-header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--rose);
+}
+
+.result-user {
+    margin-top: 0.5rem;
+    font-weight: 600;
+    color: var(--pink-main);
+}
+
+.answers-container {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    border-radius: var(--radius);
+    border: 2px solid var(--pink-light);
+}
+
+.answers-container h3 {
+    text-align: center;
+    color: var(--rose);
+    margin-bottom: 1.5rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+}
+
+.answer-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--pink-light);
+}
+
+.answer-item p:first-child {
+    font-weight: 600;
+    color: var(--rose);
+    margin-bottom: 0.5rem;
+}
+
+.strips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.photo-strip {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 2px solid var(--pink-light);
+    max-width: 260px;
+}
+
+.strip-top {
+    text-align: center;
+    color: var(--pink-main);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.strip-title {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: var(--rose);
+    margin-bottom: 1rem;
+}
+
+.strip-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    margin-bottom: 0.8rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.strip-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.strip-footer {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.download-button, .restart-button {
+    padding: 0.9rem 1.8rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.download-button {
+    background: linear-gradient(90deg, var(--pink-main), var(--rose));
+    color: white;
+}
+
+.restart-button {
+    background: white;
+    color: var(--rose);
+    border: 2px solid var(--pink-main);
+}
+
+.download-button:hover, .restart-button:hover {
+    transform: translateY(-2px);
+}
